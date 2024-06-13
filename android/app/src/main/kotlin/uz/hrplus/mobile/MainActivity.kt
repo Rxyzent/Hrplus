@@ -1,0 +1,5 @@
+package uz.hrplus.mobile
+
+import io.flutter.embedding.android.FlutterActivity
+
+class MainActivity: FlutterActivity()

@@ -1,0 +1,13 @@
+[
+  {
+    "name": "Una",
+    "image": "assets/images/PetAniBG-1001-Una-star1-Frame0001.png",
+    "animations": [
+      {
+        "condition": "star1",
+        "video": "assets/video/PetAniBG-1001-Una-star1.webm",
+        "audio": "audio/1001_V02_comp.mp3"
+      }
+    ]
+  }
+]

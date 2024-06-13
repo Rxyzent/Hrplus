@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "529998409289",
+    "project_id": "hrplus-12f1f",
+    "storage_bucket": "hrplus-12f1f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:529998409289:android:a518806c7628c0b1391998",
+        "android_client_info": {
+          "package_name": "uz.hrplus.mobile"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDyA_4Z8oosJrK2sklIT5E3qJ28bb7Ye8o"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
