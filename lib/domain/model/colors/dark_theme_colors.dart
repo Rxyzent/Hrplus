@@ -52,5 +52,8 @@ class DarkThemeColors extends ThemeColors{
   Color get color5 => StaticColors.cuttySark;
 
   @override
-  Color get color6 => StaticColors.cyprus;
+  Color get color6 => StaticColors.pear;
+
+  @override
+  Color get color7 => StaticColors.cyprus;
 }

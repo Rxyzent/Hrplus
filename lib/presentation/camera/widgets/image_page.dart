@@ -25,14 +25,14 @@ class ImagePage extends StatelessWidget {
       right: 0,
       bottom: 0,
       child: Container(
-        color: context.colors.color4.withOpacity(0.1),
+        color: context.colors.color4.withOpacity(0.8),
         padding: const EdgeInsets.symmetric(horizontal: 16),
         child: Column(
           children: [
             Expanded(
               child: Stack(
                 children: [
-                  Positioned(
+                 Positioned(
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(12),
                       child: state.imageFile != null
@@ -75,7 +75,8 @@ class ImagePage extends StatelessWidget {
                   child: CommonButton.elevated(
                     onPressed: () => context
                         .read<CameraCubit>()
-                        .createComeInGetOut(ComeInGetOutType.keldim.key),
+                        .createComeInGetOut(ComeInGetOutType.keldim.key,context),
+                    loading: state.sendingRequest,
                     text: Strings.comeIn,
                     backgroundColor: context.colors.color5,
                     textColor: context.colors.color2,
@@ -86,7 +87,8 @@ class ImagePage extends StatelessWidget {
                   child: CommonButton.elevated(
                     onPressed: () => context
                         .read<CameraCubit>()
-                        .createComeInGetOut(ComeInGetOutType.ketdim.key),
+                        .createComeInGetOut(ComeInGetOutType.ketdim.key,context),
+                    loading: state.sendingRequest,
                     text: Strings.getOut,
                     backgroundColor: context.colors.color5,
                     textColor: context.colors.color2,
@@ -101,7 +103,8 @@ class ImagePage extends StatelessWidget {
                   child: CommonButton.elevated(
                     onPressed: () => context
                         .read<CameraCubit>()
-                        .createComeInGetOut(ComeInGetOutType.navKeldim.key),
+                        .createComeInGetOut(ComeInGetOutType.navKeldim.key,context),
+                    loading: state.sendingRequest,
                     text: Strings.navComeIn,
                     backgroundColor: context.colors.color5,
                     textColor: context.colors.color2,
@@ -112,7 +115,8 @@ class ImagePage extends StatelessWidget {
                   child: CommonButton.elevated(
                     onPressed: () => context
                         .read<CameraCubit>()
-                        .createComeInGetOut(ComeInGetOutType.navKetdim.key),
+                        .createComeInGetOut(ComeInGetOutType.navKetdim.key,context),
+                    loading: state.sendingRequest,
                     text: Strings.navGetOut,
                     backgroundColor: context.colors.color5,
                     textColor: context.colors.color2,

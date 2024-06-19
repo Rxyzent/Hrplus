@@ -37,7 +37,7 @@ class LocationService {
       }
       final currentPosition =  await _geolocator.getCurrentPosition(
           locationSettings:
-              const LocationSettings(accuracy: LocationAccuracy.best));
+              const LocationSettings(accuracy: LocationAccuracy.high));
       return currentPosition;
     } on PlatformException catch (e) {
       print('Error getting current location: $e');

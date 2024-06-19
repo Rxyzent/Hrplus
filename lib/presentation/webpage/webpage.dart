@@ -27,6 +27,7 @@ class WebPage
       appBar: AppBar(
         elevation: 1,
         centerTitle: true,
+        toolbarHeight: 30,
         title: 'Hrplus'.w(500).s(18).c(context.colors.color4),
         leading: GestureDetector(
             onTap: () => context.maybePop(),

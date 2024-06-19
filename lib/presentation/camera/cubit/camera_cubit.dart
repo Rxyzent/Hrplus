@@ -88,34 +88,45 @@ class CameraCubit extends BaseCubit<CameraBuildable, CameraListenable> {
     build((buildable) => buildable.copyWith(pictureTaken: false));
   }
 
-  void createComeInGetOut(String type) async {
-    build((buildable) => buildable.copyWith(showDialog: true));
+  void createComeInGetOut(String type, BuildContext context) async {
+    build((buildable) =>
+        buildable.copyWith(showDialog: true, sendingRequest: true));
     final location = await _locationService.getCurrentLocation();
     callable(
-        future: _repo.createComeInGetOut(
-          type,
-          Location(lat: '${location?.latitude}', lon: '${location?.longitude}'),
-        ),
-        buildOnError: (error) {
-          final dioError = error as DioException;
-          var requestMessage = '';
-          if(dioError.response?.statusCode == 410){
-            requestMessage = 'Not near organization';
-          }else if(dioError.response?.statusCode == 404){
-            requestMessage = 'User not found';
-          }else if(dioError.response?.statusCode == 404){
-            requestMessage = 'Try again later';
-          }
-          return buildable.copyWith(requestMessage: requestMessage,sendingRequest: false);
-        },
-        buildOnDone: () {
-          _sendPhoto();
-          return buildable.copyWith(requestMessage: 'Success',sendingRequest: false);
-        });
+      future: _repo.createComeInGetOut(
+        type,
+        Location(lat: '${location?.latitude}', lon: '${location?.longitude}'),
+      ),
+      buildOnError: (error) {
+        final dioError = error as DioException;
+        var requestMessage = '';
+        if (dioError.response?.statusCode == 410) {
+          requestMessage = 'Not near organization';
+        } else if (dioError.response?.statusCode == 404) {
+          requestMessage = 'User not found';
+        } else if (dioError.response?.statusCode == 404) {
+          requestMessage = 'Try again later';
+        }
+        return buildable.copyWith(
+            requestMessage: requestMessage, sendingRequest: false);
+      },
+      buildOnData: (data) {
+        _sendPhoto();
+        Navigator.of(context).maybePop();
+        return buildable.copyWith(
+            requestMessage: 'Success', sendingRequest: false);
+      },
+      // buildOnDone: () {
+      //   _sendPhoto();
+      //   Navigator.of(context).maybePop();
+      //   return buildable.copyWith(
+      //       requestMessage: 'Success', sendingRequest: false);
+      // },
+    );
   }
 
-  void showDialog(bool value){
-    build((buildable) => buildable.copyWith(showDialog:value));
+  void showDialog(bool value) {
+    build((buildable) => buildable.copyWith(showDialog: value));
   }
 
   void _sendPhoto() async {

@@ -208,7 +208,7 @@ class _$CameraBuildableImpl implements _CameraBuildable {
       this.isInitialized = false,
       this.pictureTaken = false,
       this.showDialog = false,
-      this.sendingRequest = true,
+      this.sendingRequest = false,
       this.requestMessage,
       this.controller,
       final List<CameraDescription>? cameras,

@@ -54,126 +54,126 @@ class HomePage extends BasePage<HomeCubit, HomeBuildable, HomeListenable> {
         ),
       ),
       body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Expanded(
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Strings.greeting.w(500).s(13).c(context.colors.color3),
-                        const SizedBox(height: 8),
-                        if (state.userInfo != null)
-                          (state.userInfo!.name ?? 'Loading...')
-                              .w(600)
-                              .s(20)
-                              .c(context.colors.color4)
-                              .copyWith(
-                                  maxLines: 1, overflow: TextOverflow.ellipsis),
-                      ],
-                    ),
-                  ),
-                  const SizedBox(width: 8),
-                  GestureDetector(
-                    onTap: () => context.router.push(const CalendarRoute()),
-                    child: Container(
-                      height: 48,
-                      width: 48,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(24),
-                        color: context.colors.color2,
-                      ),
-                      child: Center(
-                        child: Assets.icons.calendar.svg(
-                            colorFilter: ColorFilter.mode(
-                                context.colors.color5, BlendMode.srcIn)),
-                      ),
-                    ),
-                  ),
-                  const SizedBox(width: 8),
-                  GestureDetector(
-                    onTap: () => context.router
-                        .push(WebRoute(webpageUrl: state.userInfo!.notifUrl!)),
-                    child: Container(
-                      height: 48,
-                      width: 48,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(24),
-                        color: context.colors.color5,
-                      ),
-                      child: Center(
-                        child: badges.Badge(
-                          badgeStyle: const badges.BadgeStyle(
-                            badgeColor: Colors.red,
-                          ),
-                          position: badges.BadgePosition.topEnd(top: -14),
-                          badgeContent: state.notifNumber
-                              .toString()
-                              .w(500)
-                              .s(12)
-                              .c(Colors.white),
-                          child: Assets.icons.notification.svg(
-                              colorFilter: ColorFilter.mode(
-                                  context.colors.color4, BlendMode.srcIn)),
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-              const SizedBox(height: 16),
-              Row(
+        child: RefreshIndicator(
+          onRefresh: () => context.read<HomeCubit>().refresh(),
+          child: SingleChildScrollView(
+            physics: const AlwaysScrollableScrollPhysics(),
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+              child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  date
-                      .w(500)
-                      .s(13)
-                      .c(context.colors.color3)
-                      .copyWith(maxLines: 1, overflow: TextOverflow.ellipsis),
-                  const SizedBox(width: 8),
-                  Expanded(
-                    child: Card(
-                      color: context.colors.color2,
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(18)),
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 12, vertical: 7),
-                        child: Row(
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Expanded(
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Icon(
-                              size: 18,
-                              Icons.location_pin,
-                              color: context.colors.color5,
-                            ),
-                            const SizedBox(width: 8),
-                            Expanded(
-                              child: (state.address ?? '')
-                                  .w(500)
-                                  .s(13)
-                                  .c(context.colors.color5)
+                            Strings.greeting.w(500).s(13).c(context.colors.color3),
+                            const SizedBox(height: 8),
+                            if (state.userInfo != null)
+                              (state.userInfo!.name ?? 'Loading...')
+                                  .w(600)
+                                  .s(20)
+                                  .c(context.colors.color4)
                                   .copyWith(
-                                      maxLines: 1,
-                                      overflow: TextOverflow.ellipsis),
-                            )
+                                      maxLines: 1, overflow: TextOverflow.ellipsis),
                           ],
                         ),
                       ),
-                    ),
+                      const SizedBox(width: 8),
+                      GestureDetector(
+                        onTap: () => context.router.push(const CalendarRoute()),
+                        child: Container(
+                          height: 48,
+                          width: 48,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(24),
+                            color: context.colors.color2,
+                          ),
+                          child: Center(
+                            child: Assets.icons.calendar.svg(
+                                colorFilter: ColorFilter.mode(
+                                    context.colors.color5, BlendMode.srcIn)),
+                          ),
+                        ),
+                      ),
+                      const SizedBox(width: 8),
+                      GestureDetector(
+                        onTap: () => context.router
+                            .push(WebRoute(webpageUrl: state.userInfo!.notifUrl!)),
+                        child: Container(
+                          height: 48,
+                          width: 48,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(24),
+                            color: context.colors.color5,
+                          ),
+                          child: Center(
+                            child: badges.Badge(
+                              badgeStyle: const badges.BadgeStyle(
+                                badgeColor: Colors.red,
+                              ),
+                              position: badges.BadgePosition.topEnd(top: -14),
+                              badgeContent: state.notifNumber
+                                  .toString()
+                                  .w(500)
+                                  .s(12)
+                                  .c(Colors.white),
+                              child: Assets.icons.notification.svg(
+                                  colorFilter: ColorFilter.mode(
+                                      context.colors.color4, BlendMode.srcIn)),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
-                ],
-              ),
-              Expanded(
-                  child: RefreshIndicator(
-                onRefresh: () => context.read<HomeCubit>().refresh(),
-                child: SingleChildScrollView(
-                  child: loadable(
+                  const SizedBox(height: 16),
+                  Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      date
+                          .w(500)
+                          .s(13)
+                          .c(context.colors.color3)
+                          .copyWith(maxLines: 1, overflow: TextOverflow.ellipsis),
+                      const SizedBox(width: 8),
+                      Expanded(
+                        child: Card(
+                          color: context.colors.color2,
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(18)),
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 12, vertical: 7),
+                            child: Row(
+                              children: [
+                                Icon(
+                                  size: 18,
+                                  Icons.location_pin,
+                                  color: context.colors.color5,
+                                ),
+                                const SizedBox(width: 8),
+                                Expanded(
+                                  child: (state.address ?? '')
+                                      .w(500)
+                                      .s(13)
+                                      .c(context.colors.color5)
+                                      .copyWith(
+                                          maxLines: 1,
+                                          overflow: TextOverflow.ellipsis),
+                                )
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  loadable(
                     loading: state.loading,
                     error: state.error,
                     builder: () => Column(
@@ -246,10 +246,10 @@ class HomePage extends BasePage<HomeCubit, HomeBuildable, HomeListenable> {
                         )
                       ],
                     ),
-                  ),
-                ),
-              ))
-            ],
+                  )
+                ],
+              ),
+            ),
           ),
         ),
       ),

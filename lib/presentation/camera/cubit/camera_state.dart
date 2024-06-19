@@ -13,7 +13,7 @@ class CameraBuildable with _$CameraBuildable {
     @Default(false) isInitialized,
     @Default(false) pictureTaken,
     @Default(false) showDialog,
-    @Default(true) sendingRequest,
+    @Default(false) sendingRequest,
     String? requestMessage,
     CameraController? controller,
     List<CameraDescription>? cameras,

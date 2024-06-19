@@ -69,7 +69,7 @@ class AuthCubit extends BaseCubit<AuthBuildable, AuthListenable> {
   }
 
   Future<void> _getId() async {
-    _storage.deviceId.set('eOHRLJaVTY-x0_4sKqJlbe');
+    _storage.deviceId.set('drrAbGwNQ-GSjrPvbua1dv');
     // DeviceInfoPlugin deviceInfo = DeviceInfoPlugin();
     // if (Platform.isIOS) {
     //   callable(

@@ -26,13 +26,27 @@ class CameraPage
           child: Stack(
             children: [
               Positioned(
-                bottom: 84,
+                bottom: 100,
                 top: 80,
                 left: 0,
                 right: 0,
-                child: AspectRatio(
-                  aspectRatio: state.controller!.value.aspectRatio,
-                  child: CameraPreview(state.controller!)),
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16),
+                  child: Container(
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(12),
+                        border: Border.all(
+                          color: context.colors.color4,
+                          width: 1,
+                        )),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(12),
+                      child: AspectRatio(
+                          aspectRatio: state.controller!.value.aspectRatio,
+                          child: CameraPreview(state.controller!)),
+                    ),
+                  ),
+                ),
               ),
               Positioned(
                 bottom: 0,
@@ -64,11 +78,10 @@ class CameraPage
                           width: 64,
                           child: Center(
                               child: Assets.icons.takePicture.svg(
-                            height: 32,
-                            width: 32,
+                                  height: 32,
+                                  width: 32,
                                   colorFilter: ColorFilter.mode(
-                                      context.colors.color5, BlendMode.srcIn)
-                          )),
+                                      context.colors.color5, BlendMode.srcIn))),
                         ),
                       ),
                       const Spacer(),
@@ -82,9 +95,11 @@ class CameraPage
                           height: 48,
                           width: 48,
                           child: Center(
-                              child: Assets.icons.refresh
-                                  .svg(height: 24, width: 24,colorFilter: ColorFilter.mode(
-                                  context.colors.color2, BlendMode.srcIn))),
+                              child: Assets.icons.refresh.svg(
+                                  height: 24,
+                                  width: 24,
+                                  colorFilter: ColorFilter.mode(
+                                      context.colors.color2, BlendMode.srcIn))),
                         ),
                       ),
                       const Spacer(),
@@ -111,10 +126,8 @@ class CameraPage
                   ),
                 ),
               ),
-              if(state.pictureTaken)
-                ImagePage(state: state),
-              if(state.showDialog)
-                ResultDialog(state:state),
+              if (state.pictureTaken) ImagePage(state: state),
+              if (state.showDialog) ResultDialog(state: state),
             ],
           ),
         ),

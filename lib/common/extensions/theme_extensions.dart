@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:hrplus/common/di/injection.dart';
 import 'package:hrplus/domain/model/colors/dark_theme_colors.dart';
 import 'package:hrplus/domain/model/colors/light_theme_colors.dart';
 import 'package:hrplus/domain/model/colors/material_colors.dart';
 import 'package:hrplus/domain/model/colors/theme_colors.dart';
+import 'package:hrplus/domain/model/storage/storage.dart';
 
 extension ThemeContextExtensions on BuildContext {
   ThemeColors get colors {
@@ -14,6 +16,8 @@ extension ThemeContextExtensions on BuildContext {
     }
     return ThemeColors();
   }
+
+  bool get themeMode => getIt<Storage>().theme.call() ?? true;
 
   ThemeData get darkTheme => ThemeData(
         useMaterial3: false,

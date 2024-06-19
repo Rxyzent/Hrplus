@@ -84,7 +84,6 @@ class MyApp extends StatelessWidget {
           print(state.themeMode);
           return DisplayWidget(
             child: MaterialApp.router(
-              key: ValueKey<String>(state.language ?? ''),
               title: 'Hrplus',
               debugShowCheckedModeBanner: false,
               localizationsDelegates: context.localizationDelegates,

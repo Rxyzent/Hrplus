@@ -39,6 +39,9 @@ class $AssetsIconsGen {
   SvgGenImage get homeInacative =>
       const SvgGenImage('assets/icons/home_inacative.svg');
 
+  /// File path: assets/icons/hrplus.png
+  AssetGenImage get hrplus => const AssetGenImage('assets/icons/hrplus.png');
+
   /// File path: assets/icons/information.svg
   SvgGenImage get information =>
       const SvgGenImage('assets/icons/information.svg');
@@ -126,6 +129,7 @@ class $AssetsIconsGen {
         downLeft,
         homeActive,
         homeInacative,
+        hrplus,
         information,
         language,
         location,

@@ -23,41 +23,35 @@ class ResultDialog extends StatelessWidget {
             borderRadius: BorderRadius.circular(12),
           ),
           child: Padding(
-            padding: const EdgeInsets.only(top: 16,bottom: 12),
+            padding: const EdgeInsets.only(top: 16, bottom: 12),
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
+                if(state.sendingRequest)
                 Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 10),
+                  padding: const EdgeInsets.symmetric(horizontal: 16),
+                  child: 'Sending request...' .w(400)
+                      .s(20)
+                      .c(context.colors.color4),
+                ),
+                const SizedBox(height: 8),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16),
                   child: state.requestMessage != null
-                      ? state.requestMessage!.w(400).s(20).c(context.colors.color4)
+                      ? state.requestMessage!
+                          .w(400)
+                          .s(20)
+                          .c(context.colors.error)
                       : const CircularProgressIndicator(),
                 ),
                 const SizedBox(height: 8),
-                Row(
-                  children: [
-                    Expanded(
-                      child: TextButton(
-                        onPressed: () {
-                          context.read<CameraCubit>().showDialog(false);
-                        },
-                        child: 'Try again'.w(500).s(16).c(context.colors.color2),
-                      ),
-                    ),
-                    VerticalDivider(
-                      width: 1,
-                      color: context.colors.color2,
-                    ),
-                    Expanded(
-                      child: TextButton(
-                        onPressed: () {
-                          Navigator.of(context).maybePop();
-                        },
-                        child: 'Close'.w(500).s(16).c(context.colors.color2),
-                      ),
-                    )
-                  ],
-                )
+                if (state.requestMessage != 'Success' && state.requestMessage != null)
+                  TextButton(
+                    onPressed: () {
+                      context.read<CameraCubit>().showDialog(false);
+                    },
+                    child: 'Try again'.w(500).s(16).c(context.colors.color2),
+                  ),
               ],
             ),
           ),

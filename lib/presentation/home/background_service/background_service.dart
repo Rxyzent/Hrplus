@@ -39,7 +39,7 @@ Future<void> initializeService() async {
     await flutterLocalNotificationsPlugin.initialize(
       const InitializationSettings(
         iOS: DarwinInitializationSettings(),
-        android: AndroidInitializationSettings('ic_bg_service_small'),
+        android: AndroidInitializationSettings('ic_notification'),
       ),
     );
   }
@@ -66,6 +66,26 @@ Future<void> initializeService() async {
   );
 }
 
+void notify() async {
+  const androidNotificationDetails = AndroidNotificationDetails(
+    channelId,
+    channelName,
+    channelDescription: channelDescription,
+    importance: Importance.max,
+    priority: Priority.high,
+    icon: 'ic_notification'
+  );
+  const NotificationDetails notificationDetails =
+  NotificationDetails(android: androidNotificationDetails);
+  final flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
+  await flutterLocalNotificationsPlugin.show(
+    0,
+    'Hrplus',
+    'Tracking location in background',
+    notificationDetails,
+  );
+}
+
 @pragma('vm:entry-point')
 void onStart(ServiceInstance service) async {
   service.on('stopService').listen((event) {
@@ -80,6 +100,10 @@ void onStart(ServiceInstance service) async {
 
   // Request permissions
   initializePermissions();
+
+  // if(isRunning) {
+  //   notify();
+  // }
 
   // Track location and send updates
   final storage = await Storage.create();
@@ -124,45 +148,6 @@ void onStart(ServiceInstance service) async {
     }
   });
 
-  StreamSubscription<Position>? positionStream;
-
-  void startListening() {
-    positionStream =
-        Geolocator.getPositionStream(locationSettings: locationSettings).listen(
-      (Position? position) async {
-        if (position != null && isRunning) {
-          print('Location: ${position.latitude}, ${position.longitude}');
-          await sendLocation(
-              position.latitude, position.longitude, storage, dio);
-        }
-      },
-      onError: (dynamic error) async {
-        print(error);
-        if (error is LocationServiceDisabledException) {
-          bool serviceEnabled = await Geolocator.openLocationSettings();
-          if (serviceEnabled) {
-            await Future.delayed(const Duration(seconds: 5));
-            bool isLocationEnabled =
-                await Geolocator.isLocationServiceEnabled();
-            if (isLocationEnabled) {
-              await initializeService();
-              startService();
-            } else {
-              final user = storage.userData.call();
-              final newUser = user?.copyWith(liveLocation: false);
-              storage.userData.set(newUser);
-              stopService();
-              await dio.post('stop-live-location');
-              await positionStream?.cancel();
-              print('Пользователь не включил службу геолокации');
-            }
-          }
-        }
-      },
-    );
-  }
-
-  //startListening();
 }
 
 LocationSettings get locationSettings {
