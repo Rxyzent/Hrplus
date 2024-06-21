@@ -24,6 +24,19 @@
 	<string>$(FLUTTER_BUILD_NUMBER)</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+    <key>NSCameraUsageDescription</key>
+    <string>Camera access is required to take picture of employee</string>
+    <key>NSLocationWhenInUseUsageDescription</key>
+    <string>We need your location to know your during working hours</string>
+    <key>NSLocationAlwaysUsageDescription</key>
+    <string>We need your location to know your during working hours</string>
+    <key>NSPhoneUsageDescription</key>
+    <string>We need phone access to contact us</string>
+    <key>UIBackgroundModes</key>
+    <array>
+        <string>fetch</string>
+        <string>remote-notification</string>
+    </array>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
