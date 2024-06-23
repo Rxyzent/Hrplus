@@ -8,7 +8,7 @@ import 'package:injectable/injectable.dart';
 @injectable
 class AuthCubit extends BaseCubit<AuthBuildable, AuthListenable> {
   AuthCubit(this._repo, this._storage) : super(const AuthBuildable()) {
-    _getId();
+    //_getId();
   }
 
   final AuthRepo _repo;

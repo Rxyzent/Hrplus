@@ -4,9 +4,11 @@ import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_background_service/flutter_background_service.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:hrplus/common/constants/constants.dart';
 import 'package:hrplus/domain/model/dio_interceptor/dio_interceptor.dart';
+import 'package:hrplus/domain/model/position/location_list.dart';
 import 'package:hrplus/domain/model/storage/storage.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
@@ -121,13 +123,21 @@ void onStart(ServiceInstance service) async {
       maxWidth: 90,
     ),
   );
-
+  final List<Location> location = [];
   Timer.periodic(const Duration(seconds: 10), (callback) async{
     bool isLocationEnabled =
         await Geolocator.isLocationServiceEnabled();
     if(isLocationEnabled){
+      final connection = await Connectivity().checkConnectivity();
+      final date = DateTime.now();
       final position = await Geolocator.getCurrentPosition();
-      sendLocation(position.latitude, position.longitude, storage, dio);
+      if(connection == ConnectivityResult.none){
+        location.add(Location(lat: position.latitude,lon: position.longitude,date: date.millisecondsSinceEpoch));
+      }else{
+        sendLocationList(location, storage, dio);
+        location.clear();
+        sendLocation(position.latitude, position.longitude, storage, dio);
+      }
     }else{
       bool serviceEnabled = await Geolocator.openLocationSettings();
       if(serviceEnabled){
@@ -221,6 +231,15 @@ Future<void> initializePermissions() async {
             AndroidFlutterLocalNotificationsPlugin>()
         ?.requestNotificationsPermission();
   }
+}
+
+Future<void> sendLocationList(List<Location> location, Storage storage, Dio dio) async {
+  final deviceId = storage.deviceId();
+  final request = {
+    'mobile_id': deviceId,
+    'location':location,
+  };
+  await dio.post('post-live-location-data-arch',data: request);
 }
 
 Future<void> sendLocation(

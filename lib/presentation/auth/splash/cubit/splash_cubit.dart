@@ -23,7 +23,7 @@ class SplashCubit extends BaseCubit<SplashBuildable, SplashListenable> {
     final messaging = FirebaseMessaging.instance;
     final installationId = await FirebaseInstallations.instance.getId();
     final newFcmToken = await messaging.getToken();
-    //_storage.deviceId.set(installationId);
+    _storage.deviceId.set(installationId);
     if(oldFcmToken == null){
       _storage.fcmToken.set(newFcmToken);
       _updateFcmToken();
