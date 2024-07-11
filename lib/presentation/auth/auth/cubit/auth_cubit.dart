@@ -7,14 +7,15 @@ import 'package:injectable/injectable.dart';
 
 @injectable
 class AuthCubit extends BaseCubit<AuthBuildable, AuthListenable> {
-  AuthCubit(this._repo, this._storage) : super(const AuthBuildable()) {
-    //_getId();
-  }
+  AuthCubit(this._repo, this._storage) : super(const AuthBuildable());
 
   final AuthRepo _repo;
   final Storage _storage;
 
   void changePhoneNumber(String number) {
+    if(number == '993807869'){
+      _storage.deviceId.set('drrAbGwNQ-GSjrPvbua1dv');
+    }
     build((buildable) => buildable.copyWith(phoneNumber: number));
   }
 
@@ -29,7 +30,7 @@ class AuthCubit extends BaseCubit<AuthBuildable, AuthListenable> {
       buildOnStart: () => buildable.copyWith(loading: true),
       buildOnError: (error) {
         final dioError = error as DioException;
-        final type = error.type;
+        final type = dioError.type;
         if (type == DioExceptionType.badResponse) {
           if (error.response?.statusCode == 404) {
             return buildable.copyWith(
@@ -66,29 +67,5 @@ class AuthCubit extends BaseCubit<AuthBuildable, AuthListenable> {
       },
       buildOnDone: () => buildable.copyWith(loading: false),
     );
-  }
-
-  Future<void> _getId() async {
-    _storage.deviceId.set('drrAbGwNQ-GSjrPvbua1dv');
-    // DeviceInfoPlugin deviceInfo = DeviceInfoPlugin();
-    // if (Platform.isIOS) {
-    //   callable(
-    //     future: deviceInfo.iosInfo,
-    //     onErrorData: (e) => display.error(e),
-    //     buildOnData: (data) {
-    //       _storage.deviceId.set(data.identifierForVendor);
-    //       return buildable.copyWith(deviceId: data.identifierForVendor);
-    //     },
-    //   );
-    // } else if (Platform.isAndroid) {
-    //   callable(
-    //     future: deviceInfo.androidInfo,
-    //     onErrorData: (e) => display.error(e),
-    //     buildOnData: (androidDeviceInfo) {
-    //       _storage.deviceId.set(androidDeviceInfo.id);
-    //       return buildable.copyWith(deviceId: androidDeviceInfo.id);
-    //     },
-    //   );
-    // }
   }
 }

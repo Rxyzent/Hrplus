@@ -112,17 +112,16 @@ class CameraCubit extends BaseCubit<CameraBuildable, CameraListenable> {
       },
       buildOnData: (data) {
         _sendPhoto();
+        _disposeController();
         Navigator.of(context).maybePop();
         return buildable.copyWith(
             requestMessage: 'Success', sendingRequest: false);
       },
-      // buildOnDone: () {
-      //   _sendPhoto();
-      //   Navigator.of(context).maybePop();
-      //   return buildable.copyWith(
-      //       requestMessage: 'Success', sendingRequest: false);
-      // },
     );
+  }
+
+  void _disposeController() {
+    buildable.controller?.dispose();
   }
 
   void showDialog(bool value) {

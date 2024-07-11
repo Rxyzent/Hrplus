@@ -21,6 +21,12 @@ class HomePage extends BasePage<HomeCubit, HomeBuildable, HomeListenable> {
   const HomePage({super.key});
 
   @override
+  void onFocusGained(BuildContext context) {
+    super.onFocusGained(context);
+    context.read<HomeCubit>().refresh();
+  }
+
+  @override
   Widget builder(BuildContext context, HomeBuildable state) {
     final now = DateTime.now();
     final date = DateFormat.MMMMEEEEd(context.locale.toString()).format(now);
@@ -35,9 +41,9 @@ class HomePage extends BasePage<HomeCubit, HomeBuildable, HomeListenable> {
             onPressed: () {
               _showLocationBottomSheet(context, state);
             },
-            backgroundColor: context.colors.color2,
+            backgroundColor: context.colors.error,
             child: AnimatedBorderCircle(
-              color: context.colors.color2,
+              color: context.colors.error,
               animate: state.animate,
               child: Center(
                 child: Assets.icons.location.svg(

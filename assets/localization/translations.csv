@@ -1,34 +1,34 @@
-str,uz_UZ,en_US,ru_RU
-greeting,"Assalomu aleykum,","Good morning,","Привет,"
-notification,Bildirishnomalar,Notifications,Уведомления
-lang,Ilova tili,Application language,Язык приложения
-connect,Biz bilan bog'lanish,Contact us,связаться с нами
-theme,Ilova foni,Application theme,Фон приложения
-logout,Ilovadan chiqish,Logout,Выйти из приложения
-uzbek,O'zbek tili,Uzbek,Узбекский язык
-russian,Rus tili,Russian,Русский язык
-locationOn,Lakatsiya yuborishni yoqish,Enable live location,Включить отправку данных о лактации
-locationOff,Lakatsiya yuborishni to'xtatish,Disable live location,Прекратите отправлять лактации
-comeIn,Keldim,I came,Я пришел
-getOut,Ketdim,I went,Я пошел
-calendart,Kalendar,Calendar,Календарь
-allDays,Barcha ish kunlari,All working days,Все рабочие дни
-come,Keldi,Come,Пришел
-leave,Ketdi,Gone,Ушел
-didntLeave,Ketmagan,Did not leave,Он не пошел
-workTime,Ish vaqti,Working time,Рабочее время
-early,Erta kelish,Arrive Early,Прибывать рано
-late,Kech kelish,Late,Прибытие поздно
-forgot,Unutish,Forgot,Забывчивость
-relax,Dam olish,Rest,Отдых
-dontCome,Kelmaslik,Did not come,Не идет
-login,Kirish,Enter,Входить
-didntComeYet,Kelmagan,Did not come yet,Он не пришел
-comingDays,Kelgan kunlar,The coming days,Ближайшие дни
-navComeIn,Nav Keldim,I have arrived,Я прибыл
-navGetOut,Nav Ketdim,Nav Gone,Навигация ушла
-notYet,Hali emas,Not yet,Еще нет
-earlyy,Erta,Early,Еще рано
-weekends,Dam olish kuni,,
-holidays,Bayram kuni,,
-english,Ingliz tili,English,
+str,en_US,uz_UZ,ru_RU
+greeting,"Good morning,","Assalomu aleykum,","Здравствуйте,"
+notification,Notifications,Bildirishnomalar,Уведомления
+lang,Application language,Ilova tili,Язык приложения
+connect,Contact us,Biz bilan bog'lanish,связаться с нами
+theme,Application theme,Ilova foni,Фон приложения
+logout,Logout,Ilovadan chiqish,Выйти из приложения
+uzbek,Uzbek,O'zbek tili,Узбекский язык
+russian,Russian,Rus tili,Русский язык
+locationOn,Enable live location,Lakatsiya yuborishni yoqish,Включить отправку данных о лактации
+locationOff,Disable live location,Lakatsiya yuborishni to'xtatish,Прекращение отправки лактации
+comeIn,I came,Keldim,Я пришел
+getOut,I went,Ketdim,Я ушел
+calendart,Calendar,Kalendar,Календарь
+allDays,All working days,Barcha ish kunlari,Все рабочие дни
+come,Come,Keldi,Пришел
+leave,Gone,Ketdi,Ушел
+didntLeave,Did not leave,Ketmagan,Не ушел
+workTime,Working time,Ish vaqti,Рабочее время
+early,Arrive Early,Erta kelish,Прибывать рано
+late,Late,Kech kelish,Прибытие поздно
+forgot,Forgot,Unutish,Забыть
+relax,Rest,Dam olish,Отдых
+dontCome,Did not come,Kelmaslik,Не идет
+login,Enter,Kirish,Входить
+didntComeYet,Did not come yet,Kelmagan,Он не пришел
+comingDays,The coming days,Kelgan kunlar,Дни прибытия
+navComeIn,I have arrived,Nav Keldim,Я прибыл
+navGetOut,Nav Gone,Nav Ketdim,я ушел с дежурства
+notYet,Not yet,Hali emas,Еще нет
+earlyy,Early,Erta,Еще рано
+weekends,,Dam olish kuni,Выходной
+holidays,,Bayram kuni,Праздничный день
+english,English,Ingliz tili,английский язык

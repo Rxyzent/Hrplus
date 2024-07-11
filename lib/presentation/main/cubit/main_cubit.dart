@@ -27,6 +27,9 @@ class MainCubit extends BaseCubit<MainBuildable, MainListenable> {
   void getThemeMode() async {
     final themeMode = _repo.getThemeMode();
     final currentThemeMode = PlatformDispatcher.instance.platformBrightness == Brightness.light;
+    if(themeMode == null){
+      _repo.setThemeMode(currentThemeMode);
+    }
     build((buildable) => buildable.copyWith(themeMode: themeMode ?? currentThemeMode));
   }
 

@@ -81,7 +81,6 @@ class MyApp extends StatelessWidget {
       child: BaseBuilder<MainCubit, MainBuildable, MainListenable>(
         properties: (buildable) => [buildable.themeMode],
         builder: (context, state) {
-          print(state.themeMode);
           return DisplayWidget(
             child: MaterialApp.router(
               title: 'Hrplus',

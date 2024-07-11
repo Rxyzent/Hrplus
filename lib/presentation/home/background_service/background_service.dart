@@ -68,44 +68,18 @@ Future<void> initializeService() async {
   );
 }
 
-void notify() async {
-  const androidNotificationDetails = AndroidNotificationDetails(
-    channelId,
-    channelName,
-    channelDescription: channelDescription,
-    importance: Importance.max,
-    priority: Priority.high,
-    icon: 'ic_notification'
-  );
-  const NotificationDetails notificationDetails =
-  NotificationDetails(android: androidNotificationDetails);
-  final flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
-  await flutterLocalNotificationsPlugin.show(
-    0,
-    'Hrplus',
-    'Tracking location in background',
-    notificationDetails,
-  );
-}
-
 @pragma('vm:entry-point')
 void onStart(ServiceInstance service) async {
   service.on('stopService').listen((event) {
     service.stopSelf();
   });
 
-  bool isRunning = true;
   service.on('stopService').listen((event) {
-    isRunning = false;
     service.stopSelf();
   });
 
   // Request permissions
   initializePermissions();
-
-  // if(isRunning) {
-  //   notify();
-  // }
 
   // Track location and send updates
   final storage = await Storage.create();
@@ -148,10 +122,8 @@ void onStart(ServiceInstance service) async {
           final user = storage.userData.call();
           final deviceId = storage.deviceId.call();
           final newUser = user?.copyWith(liveLocation: false);
-          print(newUser);
           storage.userData.set(newUser);
           await dio.post('stop-live-location',data: {'mobile_id':deviceId});
-          print('Пользователь не включил службу геолокации');
           service.stopSelf();
         }
       }
@@ -234,10 +206,12 @@ Future<void> initializePermissions() async {
 }
 
 Future<void> sendLocationList(List<Location> location, Storage storage, Dio dio) async {
+
   final deviceId = storage.deviceId();
+  List<Map<String, dynamic>> locationsJson = location.map((location) => location.toJson()).toList();
   final request = {
     'mobile_id': deviceId,
-    'location':location,
+    'location':locationsJson,
   };
   await dio.post('post-live-location-data-arch',data: request);
 }
