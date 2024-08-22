@@ -41,29 +41,35 @@ class AuthPage extends BasePage<AuthCubit, AuthBuildable, AuthListenable> {
               if (state.deviceError != null)
                 state.deviceError!.w(400).s(14).c(context.colors.error),
               const SizedBox(height: 16),
-              CommonTextField(
-                onFocusChanged: (focused) {},
-                background: context.colors.color5,
-                errorText: state.phoneError,
-                prefixIcon: Padding(
-                  padding: const EdgeInsets.only(left: 20),
-                  child: '+998 '.w(400).s(20).c(context.colors.color4),
+              Semantics(
+                label: 'Phone number',
+                child: CommonTextField(
+                  onFocusChanged: (focused) {},
+                  background: context.colors.color5,
+                  errorText: state.phoneError,
+                  prefixIcon: Padding(
+                    padding: const EdgeInsets.only(left: 20),
+                    child: '+998 '.w(400).s(20).c(context.colors.color4),
+                  ),
+                  mask: '## ### ## ##',
+                  keyboardType: TextInputType.number,
+                  onChanged: (number) {
+                    context.read<AuthCubit>().changePhoneNumber(number);
+                  },
                 ),
-                mask: '## ### ## ##',
-                keyboardType: TextInputType.number,
-                onChanged: (number) {
-                  context.read<AuthCubit>().changePhoneNumber(number);
-                },
               ),
               const SizedBox(height: 16),
-              CommonTextField(
-                hint: 'Parol',
-                errorText: state.passwordError,
-                obscureText: true,
-                background: context.colors.color5,
-                onChanged: (password) {
-                  context.read<AuthCubit>().changePassword(password);
-                },
+              Semantics(
+                label: 'Password',
+                child: CommonTextField(
+                  hint: 'Parol',
+                  errorText: state.passwordError,
+                  obscureText: true,
+                  background: context.colors.color5,
+                  onChanged: (password) {
+                    context.read<AuthCubit>().changePassword(password);
+                  },
+                ),
               ),
               const Expanded(flex: 3, child: SizedBox()),
               CommonButton.elevated(

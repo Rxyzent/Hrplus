@@ -20,9 +20,12 @@ class MainPage extends StatelessWidget {
         onPressed: () {
           context.router.push(const CameraRoute());
         },
-        child: Assets.icons.camera.svg(
-            colorFilter:
-                ColorFilter.mode(context.colors.color5, BlendMode.srcIn)),
+        child: Semantics(
+          label: 'Camera',
+          child: Assets.icons.camera.svg(
+              colorFilter:
+                  ColorFilter.mode(context.colors.color5, BlendMode.srcIn)),
+        ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       bottomNavigationBuilder: (_, tabsRouter) {

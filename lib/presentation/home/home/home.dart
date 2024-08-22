@@ -42,16 +42,19 @@ class HomePage extends BasePage<HomeCubit, HomeBuildable, HomeListenable> {
               _showLocationBottomSheet(context, state);
             },
             backgroundColor: context.colors.error,
-            child: AnimatedBorderCircle(
-              color: context.colors.error,
-              animate: state.animate,
-              child: Center(
-                child: Assets.icons.location.svg(
-                  height: 24,
-                  width: 24,
-                  colorFilter: ColorFilter.mode(
-                    context.colors.color5,
-                    BlendMode.srcIn,
+            child: Semantics(
+              label: 'Track location',
+              child: AnimatedBorderCircle(
+                color: context.colors.error,
+                animate: state.animate,
+                child: Center(
+                  child: Assets.icons.location.svg(
+                    height: 24,
+                    width: 24,
+                    colorFilter: ColorFilter.mode(
+                      context.colors.color5,
+                      BlendMode.srcIn,
+                    ),
                   ),
                 ),
               ),
@@ -100,9 +103,12 @@ class HomePage extends BasePage<HomeCubit, HomeBuildable, HomeListenable> {
                             color: context.colors.color2,
                           ),
                           child: Center(
-                            child: Assets.icons.calendar.svg(
-                                colorFilter: ColorFilter.mode(
-                                    context.colors.color5, BlendMode.srcIn)),
+                            child: Semantics(
+                              label: 'Calendar',
+                              child: Assets.icons.calendar.svg(
+                                  colorFilter: ColorFilter.mode(
+                                      context.colors.color5, BlendMode.srcIn)),
+                            ),
                           ),
                         ),
                       ),
@@ -128,9 +134,12 @@ class HomePage extends BasePage<HomeCubit, HomeBuildable, HomeListenable> {
                                   .w(500)
                                   .s(12)
                                   .c(Colors.white),
-                              child: Assets.icons.notification.svg(
-                                  colorFilter: ColorFilter.mode(
-                                      context.colors.color4, BlendMode.srcIn)),
+                              child: Semantics(
+                                label: 'Notification',
+                                child: Assets.icons.notification.svg(
+                                    colorFilter: ColorFilter.mode(
+                                        context.colors.color4, BlendMode.srcIn)),
+                              ),
                             ),
                           ),
                         ),

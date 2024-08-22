@@ -99,7 +99,7 @@ class CameraCubit extends BaseCubit<CameraBuildable, CameraListenable> {
       ),
       buildOnError: (error) {
         final dioError = error as DioException;
-        var requestMessage = '';
+        var requestMessage = 'Unexpected error';
         if (dioError.response?.statusCode == 410) {
           requestMessage = 'Not near organization';
         } else if (dioError.response?.statusCode == 404) {
@@ -112,7 +112,7 @@ class CameraCubit extends BaseCubit<CameraBuildable, CameraListenable> {
       },
       buildOnData: (data) {
         _sendPhoto();
-        _disposeController();
+        disposeController();
         Navigator.of(context).maybePop();
         return buildable.copyWith(
             requestMessage: 'Success', sendingRequest: false);
@@ -120,12 +120,12 @@ class CameraCubit extends BaseCubit<CameraBuildable, CameraListenable> {
     );
   }
 
-  void _disposeController() {
+  void disposeController() {
     buildable.controller?.dispose();
   }
 
   void showDialog(bool value) {
-    build((buildable) => buildable.copyWith(showDialog: value));
+    build((buildable) => buildable.copyWith(showDialog: value,requestMessage: null));
   }
 
   void _sendPhoto() async {

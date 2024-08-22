@@ -111,7 +111,10 @@ class CameraPage
                 top: 16,
                 left: 16,
                 child: GestureDetector(
-                  onTap: () => context.maybePop(),
+                  onTap: () {
+                    context.maybePop();
+                    context.read<CameraCubit>().disposeController();
+                  },
                   child: Container(
                     height: 48,
                     width: 48,

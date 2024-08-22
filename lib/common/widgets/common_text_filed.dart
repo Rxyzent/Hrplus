@@ -8,6 +8,7 @@ class CommonTextField extends StatefulWidget {
   const CommonTextField({
     super.key,
     this.hint,
+    this.label,
     this.controller,
     this.obscureText = false,
     this.prefixIcon,
@@ -36,6 +37,7 @@ class CommonTextField extends StatefulWidget {
   });
 
   final String? hint;
+  final String? label;
   final Widget? prefixIcon;
   final Widget? suffix;
   final TextEditingController? controller;
@@ -122,6 +124,7 @@ class _CommonTextFieldState extends State<CommonTextField> {
         filled: true,
         fillColor: widget.background ?? context.colors.headline,
         hintText: widget.hint,
+        labelText: widget.label,
         errorText: widget.errorText,
         contentPadding: widget.padding ??
             const EdgeInsets.symmetric(
@@ -162,7 +165,7 @@ class _CommonTextFieldState extends State<CommonTextField> {
         ),
         suffixIcon: widget.obscureText
             ? IconButton(
-                icon: passwordVisible ? Assets.icons.obscureOff.svg() : Assets.icons.obscureOn.svg(),
+                icon: passwordVisible ? Semantics(label: 'obscure off',child: Assets.icons.obscureOff.svg()) : Semantics(label:'obscure on',child: Assets.icons.obscureOn.svg()),
                 onPressed: () {
                   setState(() => passwordVisible = !passwordVisible);
                 },
